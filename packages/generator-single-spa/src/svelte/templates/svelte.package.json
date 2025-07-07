@@ -1,5 +1,6 @@
 {
   "name": "<%= name %>",
+  "type": "module",
   "scripts": {
     "build": "concurrently <%- packageManager %>:build:*",
     "build:rollup": "rollup -c",
