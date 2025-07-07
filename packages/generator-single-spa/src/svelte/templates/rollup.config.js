@@ -2,7 +2,8 @@ import svelte from "rollup-plugin-svelte";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
-import { terser } from "rollup-plugin-terser";
+import { minify } from "rollup-plugin-esbuild-minify";
+import { spawn } from "child_process";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -10,7 +11,7 @@ export default {
   input: "src/<%= orgName %>-<%= projectName %>.js",
   output: {
     sourcemap: true,
-    format: "system",
+    format: "esm",
     name: null, // ensure anonymous System.register
     file: "dist/<%= orgName %>-<%= projectName %>.js",
   },
@@ -43,7 +44,7 @@ export default {
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify
-    production && terser(),
+    production && minify(),
   ],
   watch: {
     clearScreen: false,
@@ -58,7 +59,7 @@ function serve() {
       if (!started) {
         started = true;
 
-        require("child_process").spawn("npm", ["run", "serve", "--", "--dev"], {
+        spawn("npm", ["run", "serve", "--", "--dev"], {
           stdio: ["ignore", "inherit", "inherit"],
           shell: true,
         });
