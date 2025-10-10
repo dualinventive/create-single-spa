@@ -118,6 +118,11 @@ module.exports = class SingleSpaSvelteGenerator extends PnpmGenerator {
       this.options
     );
     this.fs.copyTpl(
+      this.templatePath(`setupTests.js`),
+      this.destinationPath(`setupTests.js`),
+      this.options
+    );
+    this.fs.copyTpl(
       this.templatePath(`src/App.svelte`),
       this.destinationPath(`src/App.svelte`),
       this.options
