@@ -1,4 +1,4 @@
-import singleSpaSvelte from "single-spa-svelte";
+import singleSpaSvelte from "@single-spa/svelte";
 import { mount as originalMount, unmount as originalUnmount } from "svelte";
 import App from "./App.svelte";
 
